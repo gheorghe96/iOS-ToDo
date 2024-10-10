@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct CheckItem: Identifiable {
-    var id: UUID = UUID()
-    var text: String
-    var isChecked: Bool = false
-}
-
 struct CheckboxToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
@@ -36,9 +30,10 @@ struct CheckboxToggleStyle: ToggleStyle {
 }
 
 struct MyButtonStyle: ButtonStyle {
+    var color: Color = .accentColor
     func makeBody(configuration: Configuration) -> some View {
       configuration.label
-        .foregroundColor(.accentColor)
+        .foregroundColor(color)
         .opacity(configuration.isPressed ? 0.5 : 1.0)
     }
   }
@@ -75,7 +70,7 @@ struct CreateToDoView: View {
                 
                 Section("Check list") {
                     VStack(alignment: .leading) {
-                        ForEach(self.$checkList) { item in
+                        ForEach(self.$todo.checkList) { item in
                             HStack {
                                 Toggle(isOn: item.isChecked) {
                                     TextField("Some check item here", text: item.text)
@@ -84,19 +79,18 @@ struct CreateToDoView: View {
                                 
                                 Spacer()
                                 Button(action: {
-                                    if let index = self.checkList.firstIndex(where: {$0.id == item.id}) {
-                                        self.checkList.remove(at: index)
-                                    }
+                                    self.todo.removeFromCheckList(id: item.id)
                                 }, label: {
                                     Image(systemName: "trash")
                                         .tint(.red)
                                 })
-                                .buttonStyle(MyButtonStyle())
+                                .buttonStyle(MyButtonStyle(color: .red))
                             }
+                            .padding(.top, 5)
                         }
                         
                         Button(action: {
-                            self.checkList.append(CheckItem(text: "", isChecked: false))
+                            self.todo.addToCheckList()
                         }, label: {
                             HStack {
                                 Image(systemName: "plus")
@@ -150,7 +144,7 @@ struct CreateToDoView: View {
                 .disabled(self.todo.title.isEmpty)
         )
         .navigationTitle(self.todo.id != nil ? "Edit" : "Create")
-        .navigationBarTitleDisplayMode(.inline)
+//        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func onSavePress() {
