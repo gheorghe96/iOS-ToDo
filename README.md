@@ -10,10 +10,9 @@ This iOS application is a simple and intuitive to-do list manager that allows us
 - **Easy-to-Use Interface**: A clean and minimal UI for managing todos and their details.
 
 ## Screenshots
-
-![plot](./assets/home.png)
-![plot](./assets/edit.png)
-![plot](./assets/notifications.png)
+<img src="./assets/home.png" width="250">
+<img src="./assets/edit.png" width="250">
+<img src="./assets/notifications.png" width="250">
 
 ## Getting Started
 
