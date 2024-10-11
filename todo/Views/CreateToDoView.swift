@@ -32,11 +32,11 @@ struct CheckboxToggleStyle: ToggleStyle {
 struct MyButtonStyle: ButtonStyle {
     var color: Color = .accentColor
     func makeBody(configuration: Configuration) -> some View {
-      configuration.label
-        .foregroundColor(color)
-        .opacity(configuration.isPressed ? 0.5 : 1.0)
+        configuration.label
+            .foregroundColor(color)
+            .opacity(configuration.isPressed ? 0.5 : 1.0)
     }
-  }
+}
 
 struct CreateToDoView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -45,6 +45,9 @@ struct CreateToDoView: View {
     @State var todo: ToDo = ToDo()
     @State private var date: Bool = false
     @State private var checkList: [CheckItem] = []
+    @State private var displayDeleteAlert: Bool = false
+    
+    var onDeletePress: (_ id: UUID) -> Void = { id in }
     
     var body: some View {
         VStack() {
@@ -128,6 +131,17 @@ struct CreateToDoView: View {
                         ), displayedComponents: .hourAndMinute)
                     }
                 }
+                
+                if self.todo.id != nil {
+                    Section("Actions") {
+                        Button(action: {
+                            self.displayDeleteAlert = true
+                        }, label: {
+                            Text("Delete")
+                                .foregroundStyle(.red)
+                        })
+                    }
+                }
             }
             .listStyle(.plain)
             .onAppear {
@@ -135,6 +149,17 @@ struct CreateToDoView: View {
                     self.date = true
                 }
             }
+        }
+        .alert(isPresented: self.$displayDeleteAlert) {
+            Alert(
+                title: Text("Are you sure you want to delete this?"),
+                message: Text("There is no undo"),
+                primaryButton: .destructive(Text("Delete")) {
+                    self.onDeletePress(self.todo.id!)
+                    self.presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
         }
         .navigationBarItems(
             trailing:
@@ -144,7 +169,6 @@ struct CreateToDoView: View {
                 .disabled(self.todo.title.isEmpty)
         )
         .navigationTitle(self.todo.id != nil ? "Edit" : "Create")
-//        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func onSavePress() {

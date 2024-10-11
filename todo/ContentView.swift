@@ -15,7 +15,9 @@ struct ContentView: View {
         VStack {
             List {
                 ForEach(self.toDoList.filterToday()) { todo in
-                    NavigationLink(destination: CreateToDoView(todo: todo), label: {
+                    NavigationLink(destination: CreateToDoView(todo: todo, onDeletePress: { id in
+                        self.deleteToDo(id: id)
+                    }), label: {
                         Text(todo.title)
                             .swipeActions {
                                 Button("Delete") {
@@ -28,7 +30,9 @@ struct ContentView: View {
                 
                 Section("Tomorrow") {
                     ForEach(self.toDoList.filterTomorrow()) { todo in
-                        NavigationLink(destination: CreateToDoView(todo: todo), label: {
+                        NavigationLink(destination: CreateToDoView(todo: todo, onDeletePress: { id in
+                            self.deleteToDo(id: id)
+                        }), label: {
                             Text(todo.title)
                                 .swipeActions {
                                     Button("Delete") {
@@ -42,7 +46,9 @@ struct ContentView: View {
                 
                 Section("Upcoming") {
                     ForEach(self.toDoList.filterUpcoming()) { todo in
-                        NavigationLink(destination: CreateToDoView(todo: todo), label: {
+                        NavigationLink(destination: CreateToDoView(todo: todo, onDeletePress: { id in
+                            self.deleteToDo(id: id)
+                        }), label: {
                             Text(todo.title)
                                 .swipeActions {
                                     Button("Delete") {
