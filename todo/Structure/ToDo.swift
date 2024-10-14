@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 enum Priority: String, Codable, CaseIterable {
     case normal = "Normal"
@@ -14,13 +15,24 @@ enum Priority: String, Codable, CaseIterable {
 }
 
 struct CheckItem: Codable, Identifiable, Hashable {
-    var id: UUID = UUID()
+    var id: String
     var text: String
-    var isChecked: Bool = false
+    var isChecked: Bool
+    
+    init(text: String) {
+        self.id = randomString(length: 28)
+        self.text = text
+        self.isChecked = false
+        
+        func randomString(length: Int) -> String {
+          let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+          return String((0..<length).map{ _ in letters.randomElement()! })
+        }
+    }
 }
 
-struct ToDo: Identifiable, Codable, Hashable {
-    var id: UUID?
+struct ToDo: Identifiable, Codable {
+    var id: String?
     var title: String;
     var description: String;
     var priority: Priority;
@@ -28,7 +40,6 @@ struct ToDo: Identifiable, Codable, Hashable {
     var checkList: [CheckItem]
     
     init() {
-        self.id = nil
         self.title = "";
         self.description = "";
         self.priority = .normal
@@ -52,7 +63,33 @@ struct ToDo: Identifiable, Codable, Hashable {
     }
     
     public mutating func setId() {
-        self.id = UUID()
+        self.id = randomString(length: 28)
+    }
+    
+    public func toDictionary() -> [String: Any] {
+        var dictionary: [String: Any] = [:]
+        if let id = self.id {
+            dictionary["id"] = id
+        }
+        dictionary["title"] = self.title
+        dictionary["description"] = self.description
+        dictionary["priority"] = self.priority.rawValue
+        if let date = self.date {
+            dictionary["date"] = Timestamp(date: date)
+        }
+        dictionary["checkList"] = self.checkList.map { item in
+            return [
+                "id": item.id,
+                "text": item.text,
+                "isChecked": item.isChecked
+            ]
+        }
+        return dictionary
+    }
+    
+    private func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     public mutating func addToCheckList() {
@@ -65,7 +102,7 @@ struct ToDo: Identifiable, Codable, Hashable {
         }
     }
     
-    public mutating func removeFromCheckList(id: UUID) {
+    public mutating func removeFromCheckList(id: String) {
         if let index = self.checkList.firstIndex(where: {$0.id == id}) {
             self.checkList.remove(at: index)
         }

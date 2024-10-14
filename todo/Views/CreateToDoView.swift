@@ -47,7 +47,7 @@ struct CreateToDoView: View {
     @State private var checkList: [CheckItem] = []
     @State private var displayDeleteAlert: Bool = false
     
-    var onDeletePress: (_ id: UUID) -> Void = { id in }
+    var onDeletePress: (_ id: String) -> Void = { id in }
     
     var body: some View {
         VStack() {
@@ -181,12 +181,14 @@ struct CreateToDoView: View {
         }
         
         self.todo.save() { error in
-            print(error?.localizedDescription ?? "Unknown error")
-            return
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
         }
         
         if let id = self.todo.id {
-            self.notificationManager.removePendingNotification(identifier: id.uuidString)
+            self.notificationManager.removePendingNotification(identifier: id)
         }
         
         if let date = self.todo.date, let id = self.todo.id {

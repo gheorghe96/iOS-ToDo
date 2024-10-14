@@ -13,6 +13,7 @@ struct UserDefaultsManager {
     private let decoder = JSONDecoder()
     
     func saveNewItem(_ item: ToDo, completion: @escaping(Error?) -> Void) {
+        print("Save \(item)")
         if let savedItems = UserDefaults.standard.object(forKey: "todoList") as? Data {
             if var loadedItems = try? decoder.decode([ToDo].self, from: savedItems) {
                 
@@ -27,6 +28,8 @@ struct UserDefaultsManager {
                 } else {
                     completion("Could not save item" as? Error)
                 }
+            } else {
+                completion("Could not decode items from local storage" as? Error)
             }
         } else {
             if let encoded = try? encoder.encode([item]) {
@@ -37,7 +40,7 @@ struct UserDefaultsManager {
         }
     }
     
-    func deleteTodoItem(id: UUID) {
+    func deleteTodoItem(id: String) {
         if let savedItems = UserDefaults.standard.object(forKey: "todoList") as? Data {
             if let loadedItems = try? decoder.decode([ToDo].self, from: savedItems) {
                 let items = loadedItems.filter { $0.id != id }
@@ -55,6 +58,10 @@ struct UserDefaultsManager {
             }
         }
         return []
+    }
+    
+    func clearToDoList() {
+        UserDefaults.standard.removeObject(forKey: "todoList")
     }
     
     private func pushToDefaults(data: Data, key: String) {

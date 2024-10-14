@@ -8,7 +8,7 @@
 import UserNotifications
 
 struct NotificationPayload {
-    var id: UUID
+    var id: String
     var date: Date
     var title: String?
     var description: String?
@@ -30,7 +30,7 @@ struct NotificationsManager {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
                 
                 // Create a request with a unique identifier
-                let request = UNNotificationRequest(identifier: payload.id.uuidString, content: content, trigger: trigger)
+                let request = UNNotificationRequest(identifier: payload.id, content: content, trigger: trigger)
                 
                 // Schedule the notification
                 UNUserNotificationCenter.current().add(request) { error in
