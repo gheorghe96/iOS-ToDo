@@ -28,7 +28,6 @@ class AuthenticationManager: ObservableObject {
             if let uid = user?.uid {
                 print("User logged in: \(uid)")
             } else {
-                print("User logged out")
                 self.signInAnonymously()
             }
         }
@@ -50,8 +49,8 @@ class AuthenticationManager: ObservableObject {
         firestore.collection("users").document(uid).setData([
             "uid": uid
         ]) { error in
-            if (error != nil) {
-                print(error!.localizedDescription)
+            if let error {
+                print(error.localizedDescription)
                 return
             } else {
                 print("New user profile initialized")

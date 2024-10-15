@@ -68,7 +68,7 @@ struct CreateToDoView: View {
                             self.todo.setDescription(newValue)
                         }
                     ))
-                    .frame(minHeight: 50)
+                    .frame(minHeight: 80)
                 }
                 
                 Section("Check list") {
@@ -76,7 +76,7 @@ struct CreateToDoView: View {
                         ForEach(self.$todo.checkList) { item in
                             HStack {
                                 Toggle(isOn: item.isChecked) {
-                                    TextField("Some check item here", text: item.text)
+                                    TextField("Do something", text: item.text)
                                 }
                                 .toggleStyle(CheckboxToggleStyle())
                                 

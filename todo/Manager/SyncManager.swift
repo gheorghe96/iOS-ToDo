@@ -36,7 +36,6 @@ class SyncManager: Observable {
                 return
             } else {
                 guard let documents = querySnapshot?.documents else {
-                    print("No documents")
                     return
                 }
                 

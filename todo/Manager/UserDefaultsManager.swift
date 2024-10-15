@@ -13,7 +13,6 @@ struct UserDefaultsManager {
     private let decoder = JSONDecoder()
     
     func saveNewItem(_ item: ToDo, completion: @escaping(Error?) -> Void) {
-        print("Save \(item)")
         if let savedItems = UserDefaults.standard.object(forKey: "todoList") as? Data {
             if var loadedItems = try? decoder.decode([ToDo].self, from: savedItems) {
                 
