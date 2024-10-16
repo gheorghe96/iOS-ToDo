@@ -62,13 +62,13 @@ struct CreateToDoView: View {
                 }
                 
                 Section("Description") {
-                    TextEditor(text: Binding(
+                    TextField("Additional information", text: Binding(
                         get: { self.todo.description },
                         set: { newValue in
                             self.todo.setDescription(newValue)
                         }
-                    ))
-                    .frame(minHeight: 80)
+                    ), axis: .vertical)
+                    .lineLimit(5...10)
                 }
                 
                 Section("Check list") {
