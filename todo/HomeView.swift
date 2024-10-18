@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     @ObservedObject var authenticationManager = AuthenticationManager.shared
     @State private var toDoList: [ToDo] = []
     @State private var notificationManager = NotificationsManager()
@@ -93,13 +93,13 @@ struct ContentView: View {
             self.fetchToDoList()
             self.syncToDoList()
         }
+        .navigationTitle("Home")
         .navigationBarItems(
             trailing:
                 NavigationLink(destination: CreateToDoView(), label: {
                     Image(systemName: "plus")
                 })
         )
-        .navigationTitle("Today")
     }
     
     private func fetchToDoList() {
@@ -137,5 +137,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }

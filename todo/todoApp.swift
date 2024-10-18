@@ -44,10 +44,12 @@ struct todoApp: App {
     @State private var displayNewTodoView: Bool = false
     @Environment(\.scenePhase) var phase
     
+    @State var selection = 1
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView()
+                HomeView()
                     .navigationDestination(isPresented: self.$displayNewTodoView) {
                         CreateToDoView()
                     }
@@ -74,7 +76,20 @@ struct todoApp: App {
         }
     }
     
-    func addQuickActions() {
+    private func getNaviationTitle() -> String{
+        switch(selection) {
+        case 1:
+            return "Home"
+        case 2:
+            return "Profile"
+        case 3:
+            return "Settings"
+        default:
+            return "Home"
+        }
+    }
+    
+    private func addQuickActions() {
         UIApplication.shared.shortcutItems = [
             UIApplicationShortcutItem(type: "new_todo", localizedTitle: "New Todo", localizedSubtitle: "Quickly create todo", icon: UIApplicationShortcutIcon.init(systemImageName: "plus")),
         ]
