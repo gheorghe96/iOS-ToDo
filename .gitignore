@@ -61,6 +61,4 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-GoogleService-Info.plist
-
 ./todo/GoogleService-Info.plist
