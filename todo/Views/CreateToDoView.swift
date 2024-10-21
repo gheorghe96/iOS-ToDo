@@ -94,6 +94,8 @@ struct CreateToDoView: View {
                         
                         Button(action: {
                             self.todo.addToCheckList()
+                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         }, label: {
                             HStack {
                                 Image(systemName: "plus")
