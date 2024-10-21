@@ -16,14 +16,24 @@ struct HomeListSection: View {
             NavigationLink(destination: CreateToDoView(todo: todo, onDeletePress: { id in
                 onDeleteItem(id)
             }), label: {
-                HStack {
-                    VStack {
-                        Text(todo.title)
-                            .lineLimit(1)
-                        Text(todo.description)
-                            .lineLimit(2)
+                VStack(alignment: .leading) {
+                    Text(todo.title)
+                        .lineLimit(1)
+                    Text(todo.description)
+                        .lineLimit(2)
+                        .font(.system(.footnote))
+                    
+                    HStack {
+                        Text("Priority \(todo.priority.rawValue)")
                             .font(.system(.caption))
+                        
+                        Spacer()
+                        if let date = todo.date {
+                            Text(date, style: .date)
+                                .font(.system(.caption))
+                        }
                     }
+                    .padding(.top, 5)
                 }
                 .swipeActions {
                     if let id = todo.id {

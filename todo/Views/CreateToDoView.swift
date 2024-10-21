@@ -114,7 +114,6 @@ struct CreateToDoView: View {
                             Text($0.rawValue)
                         }
                     }
-                    .pickerStyle(.navigationLink)
                     
                     Toggle("Date", isOn: $date)
                     if (self.date) {

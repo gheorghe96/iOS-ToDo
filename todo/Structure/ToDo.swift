@@ -10,8 +10,8 @@ import FirebaseFirestore
 
 enum Priority: String, Codable, CaseIterable {
     case normal = "Normal"
-    case low = "low"
-    case hight = "hight"
+    case low = "Low"
+    case hight = "Hight"
 }
 
 struct CheckItem: Codable, Identifiable, Hashable {

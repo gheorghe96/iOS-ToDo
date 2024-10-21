@@ -96,9 +96,15 @@ struct HomeView: View {
         .navigationTitle("Home")
         .navigationBarItems(
             trailing:
-                NavigationLink(destination: CreateToDoView(), label: {
-                    Image(systemName: "plus")
-                })
+                HStack {
+                    NavigationLink(destination: CreateToDoView(), label: {
+                        Image(systemName: "plus")
+                    })
+                    
+                    NavigationLink(destination: SettingsView(), label: {
+                        Image(systemName: "gear")
+                    })
+                }
         )
     }
     
