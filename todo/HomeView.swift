@@ -74,6 +74,7 @@ struct HomeView: View {
                         })
                     }
                 }
+                .scrollContentBackground(.hidden)
                 .listStyle(.plain)
                 .tag(1)
                 
@@ -83,6 +84,7 @@ struct HomeView: View {
                     .tag(3)
             }
             .tabViewStyle(.page)
+            .background(Color.white)
         }
         .onChange(of: userLoggedIn) {
             if userLoggedIn {
@@ -93,7 +95,7 @@ struct HomeView: View {
             self.fetchToDoList()
             self.syncToDoList()
         }
-        .navigationTitle("Home")
+        .navigationTitle("Today")
         .navigationBarItems(
             trailing:
                 HStack {

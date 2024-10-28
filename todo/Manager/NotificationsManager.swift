@@ -36,7 +36,9 @@ struct NotificationsManager {
                 UNUserNotificationCenter.current().add(request) { error in
                     if let error = error {
                         print("Error scheduling notification: \(error)")
+                        return
                     }
+                    print("Notification scheduled successfully.")
                 }
             } else {
                 print("Permission denied")
