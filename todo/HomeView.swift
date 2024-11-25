@@ -57,26 +57,42 @@ struct HomeView: View {
             .padding(.leading)
             
             TabView(selection: $tabSelection) {
-                List {
-                    HomeListSection(list: self.toDoList.filterToday(), onDeleteItem: { id in
-                        self.deleteToDoWithId(id)
-                    })
-                    
-                    Section("Tomorrow") {
-                        HomeListSection(list: self.toDoList.filterTomorrow(), onDeleteItem: { id in
-                            self.deleteToDoWithId(id)
-                        })
+                if (self.toDoList.isEmpty) {
+                    VStack {
+                        Spacer()
+                        Text("No items to show.")
+                        Spacer()
                     }
-                    
-                    Section("Upcoming") {
-                        HomeListSection(list: self.toDoList.filterUpcoming(), onDeleteItem: { id in
-                            self.deleteToDoWithId(id)
-                        })
+                    .tag(1)
+                } else {
+                    List {
+                        if (self.toDoList.filterToday().isEmpty == false) {
+                            Section("Today") {
+                                HomeListSection(list: self.toDoList.filterToday(), onDeleteItem: { id in
+                                    self.deleteToDoWithId(id)
+                                })
+                            }
+                        }
+                        
+                        if (self.toDoList.filterTomorrow().isEmpty == false) {
+                            Section("Tomorrow") {
+                                HomeListSection(list: self.toDoList.filterTomorrow(), onDeleteItem: { id in
+                                    self.deleteToDoWithId(id)
+                                })
+                            }
+                        }
+                        
+                        if (self.toDoList.filterUpcoming().isEmpty == false) {
+                            Section("Upcoming") {
+                                HomeListSection(list: self.toDoList.filterUpcoming(), onDeleteItem: { id in
+                                    self.deleteToDoWithId(id)
+                                })
+                            }
+                        }
                     }
+                    .scrollContentBackground(.hidden)
+                    .listStyle(.plain)
                 }
-                .scrollContentBackground(.hidden)
-                .listStyle(.plain)
-                .tag(1)
                 
                 Text("Coming soon")
                     .tag(2)
@@ -84,7 +100,7 @@ struct HomeView: View {
                     .tag(3)
             }
             .tabViewStyle(.page)
-            .background(Color.white)
+            .background(Color(UIColor.systemBackground))
         }
         .onChange(of: userLoggedIn) {
             if userLoggedIn {
@@ -95,7 +111,7 @@ struct HomeView: View {
             self.fetchToDoList()
             self.syncToDoList()
         }
-        .navigationTitle("Today")
+        .navigationTitle("Reminders")
         .navigationBarItems(
             trailing:
                 HStack {
