@@ -12,6 +12,7 @@
 		0DE916002CB9AC0B005C3D57 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE915FF2CB9AC0B005C3D57 /* FirebaseCore */; };
 		0DE916022CB9AC0B005C3D57 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE916012CB9AC0B005C3D57 /* FirebaseFirestore */; };
 		0DE916042CB9AC0B005C3D57 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE916032CB9AC0B005C3D57 /* FirebaseStorage */; };
+		C8FEB0392CF51E56007CAEA5 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C8FEB0382CF51E56007CAEA5 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 				0DE916002CB9AC0B005C3D57 /* FirebaseCore in Frameworks */,
 				0DE916042CB9AC0B005C3D57 /* FirebaseStorage in Frameworks */,
 				0DE915FE2CB9AC0B005C3D57 /* FirebaseAuth in Frameworks */,
+				C8FEB0392CF51E56007CAEA5 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +153,7 @@
 				0DE915FF2CB9AC0B005C3D57 /* FirebaseCore */,
 				0DE916012CB9AC0B005C3D57 /* FirebaseFirestore */,
 				0DE916032CB9AC0B005C3D57 /* FirebaseStorage */,
+				C8FEB0382CF51E56007CAEA5 /* Lottie */,
 			);
 			productName = todo;
 			productReference = 0DEFC9A82C9F659900484308 /* todo.app */;
@@ -236,6 +239,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0DE915F92CB9ABE0005C3D57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C8FEB0372CF51E2B007CAEA5 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0DEFC9A92C9F659900484308 /* Products */;
@@ -449,8 +453,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -492,8 +496,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -651,6 +655,14 @@
 				minimumVersion = 11.3.0;
 			};
 		};
+		C8FEB0372CF51E2B007CAEA5 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -678,6 +690,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0DE915F92CB9ABE0005C3D57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		C8FEB0382CF51E56007CAEA5 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8FEB0372CF51E2B007CAEA5 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

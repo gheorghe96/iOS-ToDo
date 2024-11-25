@@ -54,15 +54,20 @@ struct HomeView: View {
                 
                 Spacer()
             }
-            .padding(.leading)
+            .padding([.leading])
+            .padding(.top, 5)
             
             TabView(selection: $tabSelection) {
                 if (self.toDoList.isEmpty) {
                     VStack {
                         Spacer()
-                        Text("No items to show.")
+                        LottieView(animationName: "homeEmptyList", loopMode: .loop, speed: 1.5)
+                            .frame(width: 200, height: 200)
+                        Text("Organize your daily tasks and reminders with eReminder")
+                            .multilineTextAlignment(.center)
                         Spacer()
                     }
+                    .padding(.bottom, 40)
                     .tag(1)
                 } else {
                     List {
@@ -92,10 +97,25 @@ struct HomeView: View {
                     }
                     .scrollContentBackground(.hidden)
                     .listStyle(.plain)
+                    .tag(1)
                 }
                 
-                Text("Coming soon")
+                if ([].isEmpty) {
+                    VStack {
+                        Spacer()
+                        LottieView(animationName: "easyNotesEmptyList", loopMode: .loop, speed: 1.5)
+                            .frame(width: 200, height: 200)
+                        Text("Organize your daily tasks and reminders with eReminder")
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }
+                    .padding(.bottom, 40)
                     .tag(2)
+                } else {
+                    Text("Coming soon")
+                        .tag(2)
+                }
+                
                 Text("Coming soon")
                     .tag(3)
             }
