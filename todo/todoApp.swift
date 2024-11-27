@@ -44,8 +44,6 @@ struct todoApp: App {
     @State private var displayNewTodoView: Bool = false
     @Environment(\.scenePhase) var phase
     
-    @State var selection = 1
-    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
@@ -73,19 +71,6 @@ struct todoApp: App {
             .onAppear {
                 self.authenticationManager = AuthenticationManager()
             }
-        }
-    }
-    
-    private func getNaviationTitle() -> String{
-        switch(selection) {
-        case 1:
-            return "Home"
-        case 2:
-            return "Profile"
-        case 3:
-            return "Settings"
-        default:
-            return "Home"
         }
     }
     
